@@ -1,0 +1,37 @@
+@model IEnumerable<GRT.Security.Platform.Models.SecurityLog>
+@{
+    ViewData["Title"] = "Security Logs";
+}
+
+<h1>Security Logs</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Timestamp</th>
+            <th>User ID</th>
+            <th>Event Type</th>
+            <th>IP Address</th>
+            <th>Device ID</th>
+            <th>Country</th>
+            <th>Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            @foreach (var log in Model.OrderByDescending(l => l.TimeStamp).Take(100))
+            {
+                <tr>
+                    <td>@log.TimeStamp.ToString("g")</td>
+                    <td>@log.UserId</td>
+                    <td>@log.EventType</td>
+                    <td>@log.IPAddress</td>
+                    <td>@log.DeviceId</td>
+                    <td>@log.CountryCode</td>
+                    <td>@log.Details</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

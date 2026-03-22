@@ -1,0 +1,67 @@
+@{
+    ViewData["Title"] = "Security Policies";
+}
+
+<h1>Security Policies</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                Mode Settings
+            </div>
+            <div class="card-body">
+                <form method="post" asp-action="ToggleBankingMode">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="enabled" value="true" @(ViewBag.BankingMode ? "checked" : "")>
+                        <label class="form-check-label">
+                            Banking Mode
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-2">Update Banking Mode</button>
+                </form>
+
+                <hr>
+
+                <form method="post" asp-action="ToggleRestrictedMode">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="enabled" value="true" @(ViewBag.RestrictedMode ? "checked" : "")>
+                        <label class="form-check-label">
+                            Restricted Mode
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-2">Update Restricted Mode</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                Country Policies
+            </div>
+            <div class="card-body">
+                <h6>Allowed Countries</h6>
+                <p>@string.Join(", ", ViewBag.AllowedCountries ?? new string[0])</p>
+
+                <h6>Blocked Countries</h6>
+                <p>@string.Join(", ", ViewBag.BlockedCountries ?? new string[0])</p>
+
+                <form method="post" asp-action="BlockCountry" class="mt-3">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="countryCode" placeholder="Country Code (e.g., RU)" maxlength="2">
+                        <button class="btn btn-danger" type="submit">Block</button>
+                    </div>
+                </form>
+
+                <form method="post" asp-action="UnblockCountry" class="mt-2">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="countryCode" placeholder="Country Code" maxlength="2">
+                        <button class="btn btn-success" type="submit">Unblock</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

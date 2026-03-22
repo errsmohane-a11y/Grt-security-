@@ -1,0 +1,6 @@
+@GRT.Security.Platform_HostAddress = http://localhost:5062
+
+GET {{GRT.Security.Platform_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
